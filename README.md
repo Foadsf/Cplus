@@ -9,6 +9,7 @@ all the things I wish C already had
 6. pure C, no OOP!
 
 
+requirments:
 
 1. cross-platform
 2. hardware agnostic
