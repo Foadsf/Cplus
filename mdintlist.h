@@ -20,7 +20,7 @@ typedef struct Mdintlist {
 //     }
 //   } else {
 //     for (size_t i = 0; i < indim.e[0]; i++) {
-//       tmpptr[i] = *malcintarr(nrmfrmintlist(indim, indim.e[0]));
+//       tmpptr[i] = *malcintarr(nrmfrmintlist(&indim, indim.e[0]));
 //     }
 //   }
 //   return tmpptr;
@@ -32,7 +32,7 @@ typedef struct Mdintlist {
 //   } else {
 //     void **tmpptr = (void **)malloc(sizeof(void *) * indim.e[0]);
 //     for (size_t i = 0; i < indim.e[0]; i++) {
-//       tmpptr[i] = malcintarr(nrmfrmintlist(indim, indim.e[0]));
+//       tmpptr[i] = malcintarr(nrmfrmintlist(&indim, indim.e[0]));
 //     }
 //   }
 //   return tmpptr;
@@ -58,11 +58,11 @@ mdintlist initmdintlist(intlist indim) {
   //   // tmpmdintlist.cl = (mdintlist *)malloc(sizeof(int) * indim.e[0]);
   //   // tmpmdintlist.cl=(void *)malloc(sizeof(void)*indim.e[0])
   //   tmpmdintlist.cl = (mdintlist *)malloc(
-  //       sizeof(initmdintlist(nrmfrmintlist(indim, indim.e[0]))) *
+  //       sizeof(initmdintlist(nrmfrmintlist(&indim, indim.e[0]))) *
   //       indim.e[0]);
   //   // for (size_t i = 0; i < indim.e[0]; i++) {
   //   //   tmpmdintlist.cl[i] =
-  //   &initmdintlist(nrmfrmintlist(indim,indim.e[0]));
+  //   &initmdintlist(nrmfrmintlist(&indim,indim.e[0]));
   //   // }
   // }
   return tmpmdintlist;
@@ -81,7 +81,7 @@ mdintlist initmdintlist(intlist indim) {
 //         tmpmdintlist.cl[i] =
 //             (intlisttomdl(blkintlist(inlist, i * (inlist.l / indim.e[0]),
 //                                      inlist.l / indim.e[0]),
-//                           nrmfrmintlist(indim, indim.e[0])))
+//                           nrmfrmintlist(&indim, indim.e[0])))
 //                 .cl;
 //       }
 //     }

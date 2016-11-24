@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]) {
   // rmelmintlist(&tmplist1, 4);
   // printintlist(tmplist1);
 
-  printintlist(appendintlists(tmplist1, tmplist2));
+  printintlist(appendintlists(&tmplist1, &tmplist2));
   printintlist(intpluslist(10, tmplist1));
   printintlist(intmultlist(10, tmplist1));
   printintlist(listpluslist(tmplist2, tmplist1));

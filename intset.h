@@ -27,7 +27,7 @@ intset initintset() {
 
 int isinintset(intset inset, int inint) {
   int tmpint = 0;
-  for (int i = 0; i < inset.l; i++)
+  for (size_t i = 0; i < inset.l; i++)
     if (inint == inset.e[i]) {
       tmpint = i + 1;
       break;
@@ -39,7 +39,7 @@ int addtointset(intset *inset, int inint) {
   int tmpint = 0;
   if (!isinintset(*inset, inint)) {
     int *tmpptr = memalc((*inset).l + 1);
-    for (int i = 0; i < (*inset).l; i++) {
+    for (size_t i = 0; i < (*inset).l; i++) {
       tmpptr[i] = (*inset).e[i];
       // free((*inset).e+i);
     };
@@ -62,7 +62,7 @@ int rmfrmintset(intset *inset, int inint) {
       // free((*inset).e+i);
     };
 
-    for (int i = tmppos + 1; i < (*inset).l; i++) {
+    for (size_t i = tmppos + 1; i < (*inset).l; i++) {
       tmpptr[i - 1] = (*inset).e[i];
       // free((*inset).e+i);
     }
@@ -77,24 +77,25 @@ int rmfrmintset(intset *inset, int inint) {
 
 intset unionintsets(intset inset1, intset inset2) {
   intset tmpset = inset1;
-  for (int i = 0; i < inset2.l; i++)
+  for (size_t i = 0; i < inset2.l; i++)
     addtointset(&tmpset, inset2.e[i]);
   return tmpset;
 }
 
 intset diffintset(intset inset1, intset inset2) {
   intset tmpset = inset1;
-  for (int i = 0; i < inset2.l; i++)
+  for (size_t i = 0; i < inset2.l; i++)
     rmfrmintset(&tmpset, inset2.e[i]);
   return tmpset;
 }
 
-intset extintset(intset inset1, intset inset2) {
-  return unionintsets(diffintset(inset1, inset2), diffintset(inset2, inset1));
+intset extintset(intset *inset1, intset *inset2) {
+  return unionintsets(diffintset(*inset1, *inset2),
+                      diffintset(*inset2, *inset1));
 }
 
-intset intintset(intset inset1, intset inset2) {
-  return diffintset(inset1, diffintset(inset1, inset2));
+intset intintset(intset *inset1, intset *inset2) {
+  return diffintset(*inset1, diffintset(*inset1, *inset2));
 }
 
 intset intplusset(int inint, intset inset) {
